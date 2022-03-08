@@ -33,7 +33,14 @@ if __name__ == '__main__':
     # unittest.TextTestRunner().run(suite)
 
     # 函数批量用例名执行
-    names = unittest.defaultTestLoader.getTestCaseNames(numberTests)
-    smoke_test = unittest.defaultTestLoader.loadTestsFromNames(getFullTestCaseName(names))
-    suite = unittest.TestSuite([smoke_test])
-    unittest.TextTestRunner().run(suite)
+    # names = unittest.defaultTestLoader.getTestCaseNames(numberTests)
+    # smoke_test = unittest.defaultTestLoader.loadTestsFromNames(getFullTestCaseName(names))
+    # suite = unittest.TestSuite([smoke_test])
+    # unittestDemo1.TextTestRunner().run(suite)
+
+    # 执行目录下的用例
+    unit = "unittestDemo"
+    dis = unittest.defaultTestLoader.discover(unit,pattern='*.py')
+    # suite = unittest.TestSuite(dis)
+    # unittestDemo1.TextTestRunner.run(suite)
+    print(dis)
