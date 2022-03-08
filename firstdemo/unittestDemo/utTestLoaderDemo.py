@@ -1,9 +1,6 @@
 import unittest
 # import stringTests, numberTests
 
-from numberTests import numberTests
-from stringTests import stringTests
-
 def getFullTestCaseName(names):
     full_names = []
     for item in names:
@@ -39,8 +36,8 @@ if __name__ == '__main__':
     # unittestDemo1.TextTestRunner().run(suite)
 
     # 执行目录下的用例
-    unit = "unittestDemo"
-    dis = unittest.defaultTestLoader.discover(unit,pattern='*.py')
-    # suite = unittest.TestSuite(dis)
-    # unittestDemo1.TextTestRunner.run(suite)
-    print(dis)
+    unit = "../unittestDemo"
+    dis = unittest.defaultTestLoader.discover(unit+'/smoke',pattern='*.py')
+    suite = unittest.TestSuite(dis)
+    unittest.TextTestRunner().run(suite)
+    # print(dis)
