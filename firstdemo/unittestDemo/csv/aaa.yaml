@@ -1,0 +1,8 @@
+#animal:pets
+#
+#hash:{name:Steve,foo:bar}
+
+#- Cat
+#- Dog
+
+{animal :['cat','Dog']}
