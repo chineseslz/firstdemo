@@ -3,14 +3,15 @@
 '''
 
 from quna_book import *
+from base_function import *
 
-def test_book_ticket():
-    start = "南京"
-    end = "青岛"
-    n = 2
-    name = "孙梁柱"
-    id = "320902199608236306"
-    book_ticket(start,end,n,name,id)
+date = read_excel("aaa.txt", 0, True)
+
+
+#   @pytest.mark.parametrize(["start","end","n","name","id"],data)
+def test_book_ticket(start, end, n, name, id):
+    book_ticket(start, end, n, name, id)
+
 
 if __name__ == '__main__':
     test_book_ticket()
