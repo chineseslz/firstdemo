@@ -13,7 +13,7 @@ from ..common.handler_log import my_log
 
 
 @ddt
-class TestRegister(unittest.TestCase):
+class TestLogin(unittest.TestCase):
     excel = HandleExcel(os.path.join(DATA_DIR, 'apicases.xlsx'), 'register')
     # 读取用例数据
     cases = excel.read_data()
@@ -21,7 +21,7 @@ class TestRegister(unittest.TestCase):
     headers = eval(conf.get("env", "headers"))
 
     @list_data(cases)
-    def test_register(self, item):
+    def test_login(self, item):
         # 第一步，准备用例数据
         # 1.接口地址
         url = self.base_url + item['url']

@@ -1,12 +1,12 @@
 import unittest
-
+from ..shiZhanDemo.common.handle_path import CASES_DIR, REPORT_DIR
 from unittestreport import TestRunner
 
-suite = unittest.defaultTestLoader.discover(r'C:\testproject\firstdemo\firstdemo\firstdemo\jieKouDemo\shiZhanDemo\testcases')
+suite = unittest.defaultTestLoader.discover(CASES_DIR)
 
 runner = TestRunner(suite,
-                    filename="",
-                    report_dir=r"C:\testproject\firstdemo\firstdemo\firstdemo\jieKouDemo\shiZhanDemo\logs",
+                    filename="jiekouDemo.html",
+                    report_dir=REPORT_DIR,
                     )
 
 runner.run()
