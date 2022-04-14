@@ -5,6 +5,7 @@
 import unittest
 import os
 import requests
+import random
 from unittestreport import ddt, list_data
 from ..common.handle_excel import HandleExcel
 from ..common.handle_path import DATA_DIR
@@ -25,7 +26,11 @@ class TestRegister(unittest.TestCase):
         # 第一步，准备用例数据
         # 1.接口地址
         url = self.base_url + item['url']
-        # 2.请求参数    excel读取出字符串转换一下
+        # 2.请求参数
+        if '#mobile' in item['data']:
+            phone = self.random_mobile()
+            item['data'] = item['data'].replace('#mobile#',phone)
+        #excel读取出字符串转换一下
         params = eval(item["data"])
         # 3.请求头
         # 4.请求方法
@@ -45,8 +50,11 @@ class TestRegister(unittest.TestCase):
             #记录日志
             my_log.error("用例---【{}】---执行失败".format(item['title']))
             my_log.error(e)
-            #回写结果到excel
             raise e
         else:
             my_log.info("用例---【{}】---执行通过".format(item['title']))
 
+    def random_mobile(self):
+        '''随机生产手机号'''
+        phone = str(random.randint(13300000000,13399999999))
+        return phone
