@@ -2,36 +2,48 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 import time
 
-
 driver = webdriver.Chrome()
-driver.implicitly_wait(10) #隐式等待
+driver.implicitly_wait(10)  # 隐式等待
 
-driver.maximize_window()#最大化浏览器窗口
+driver.maximize_window()  # 最大化浏览器窗口
 
-url = "http://192.168.0.168:8009/#/home"
-driver.get(url) #连接地址
+url = "https://www.gzjkqaq.com/park/#/login"
+driver.get(url)  # 连接地址
 # print(driver.title)    #输出浏览器标题
 
-#登录
+ele = driver.find_element(By.XPATH,
+                          '/html/body/div/div[1]/div/div/div[10]/div/div[2]/div/form/div[1]/div/div/input').send_keys(
+    'admin')
+ele = driver.find_element(By.XPATH,
+                          '/html/body/div/div[1]/div/div/div[10]/div/div[2]/div/form/div[2]/div/div/input').send_keys(
+    'admin')
 time.sleep(3)
-login_user = driver.find_elements(By.CLASS_NAME,"el-input__inner")[0]
-login_user.send_keys("admin")
-login_pwd = driver.find_elements(By.CLASS_NAME,"el-input__inner")[1]
-login_pwd.send_keys("admin")
-login_btn = driver.find_element(By.CLASS_NAME,("el-button.login-btn-submit.el-button--primary.el-button--medium"))
-login_btn.click()
-time.sleep(2)
-driver.find_element(By.XPATH,"//*[text()='设备管理']").click()
-time.sleep(2)
-driver.find_element(By.XPATH,"//*[text()='基站管理']").click()
-time.sleep(2)
-driver.find_element(By.XPATH,"//*[text()='新增基站设备']").click()
-time.sleep(2)
-driver.find_element(By.XPATH,'//*[@id="pane-pos/basicData/base-station-list"]/div/div/div/div[4]/div/div[2]/form/table/tr[1]/td[2]/div/div/div/input').send_keys("123")
-time.sleep(2)
-driver.find_element(By.XPATH,"//*[text()='确定']").click()
+ele = driver.find_element(By.XPATH,
+                          '/html/body/div/div[1]/div/div/div[10]/div/div[2]/div/form/div[3]/div/button/span').click()
+time.sleep(1)
+
+ele = driver.find_element(By.XPATH, '//*[@id="theme-color--"]/aside/div/ul/li[3]/div').click()
+time.sleep(1)
+ele = driver.find_element(By.XPATH, '//*[@id="theme-color--"]/aside/div/ul/li[3]/ul/li[1]').click()
+time.sleep(1)
+
+ele = driver.find_element(By.XPATH, '//*[@id="pane-notice/mettingNotice"]/div/div/div/div[1]/button').click()
+time.sleep(1)
+# 输入会议名称
+ele = driver.find_element(By.XPATH,
+                          '//*[@id="pane-notice/mettingNotice"]/div/div/div/div[4]/div[2]/div/div[2]/form/table/tr[1]/td[2]/div/div/div[1]/input').send_keys(
+    '自动脚本会议')
+time.sleep(1)
+
+
+link = driver.find_element(By.XPATH,
+                       '//*[@id="pane-notice/mettingNotice"]/div/div/div/div[4]/div[2]/div/div[2]/form/table/tr[2]/td[2]/div/div/div[1]/div/div').click()
+dizhi = driver.find_element(By.XPATH, '//*[@id="tipinput"]')
+js = "arguments[0].v-model='江苏中石科技有限公司'；"
+link = driver.execute_script(js, dizhi)
 
 
 
