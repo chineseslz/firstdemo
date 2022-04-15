@@ -10,34 +10,37 @@ con = pymysql.connect(
     port=3306,
     user='future',
     password='123456',
-    charset='utf8'
+    charset='utf8',
+    # cursorclass=pymysql.cursors.DictCursor    # 设置游标对象返回的数据类型  （字典）   # 默认是元祖
 )
 
 # #2.创建游标对象
-cur = con.cursor()
-
-sql = 'select leave_amount from futureloan.member where mobile_phone = "13265895752"; '
-#3.执行sql
-res = cur.execute(sql)
-con.commit()
-print(res)
+# cur = con.cursor()
+#
+# sql = 'select leave_amount from futureloan.member where mobile_phone = "13265895752"; '
+# #3.执行sql
+# res = cur.execute(sql)
+# # con.commit()
+# print(res)
+# #获取查询集中所有的内容
+# res = cur.fetchall()
+# print(res)
 
 #关闭
-cur.close()
-con.close()
-
+# cur.close()
+# con.close()
 
 
 # 创建一个游标对象（自动提交事务）
-# with con as cur:
-#     sql = 'select leave_amount from futureloan.member where mobile_phone = "13265895752"; '
-#     res = cur.execute(sql)
-#
-# print(res)
+with con as cur:
+    sql = 'select leave_amount from futureloan.member where mobile_phone = "13265895752"; '
+    res = cur.execute(sql)
+
+print(res)
 #
 # # 关闭
-# cur.close()
-# con.close()
+cur.close()
+con.close()
 
 '''
 with 启动对象 上下文管理器 的关键字
