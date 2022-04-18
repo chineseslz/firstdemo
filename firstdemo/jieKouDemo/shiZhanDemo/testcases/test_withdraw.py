@@ -12,12 +12,14 @@ from ..common.handle_excel import HandleExcel
 from ..common.handle_path import DATA_DIR
 from ..common.handle_conf import conf
 from ..common.handler_log import my_log
+from jieKouDemo.mysqlDemo.handle_mysql import HandleDB
 
 
 @ddt
 class TestWithdraw(unittest.TestCase):
     execl = HandleExcel(os.path.join(DATA_DIR, "apicases.xlsx"), 'withdraw')
     cases = execl.read_data()
+    db = HandleDB
 
     @classmethod
     def setUpClass(cls):
@@ -49,13 +51,26 @@ class TestWithdraw(unittest.TestCase):
         expected = eval(item['expected'])
         method = item['method'].lower()
 
+        sql = 'select * from futureloan.member where mobile_phone = "{}" '.format(conf.get("test_data","mobile_phone"))
+        # 执行sql前查询余额
+        start_amount = self.db.find_one(sql)[0]  #[0]元组数据类型获取
+
         response = requests.request(method=method, url=url, json=params, headers=self.headers)
         res = response.json()
 
-        # 断言
+        # 执行sql后查询余额
+        end_amount = self.db.find_one(sql)[0]
+
+
         try:
             self.assertEqual(expected['code'],res['code'])
             self.assertEqual(expected['msg'],res['msg'])
+            #    校验余额变化
+            if res['code'] == 'OK':
+                self.assertEqual(float(end_amount-start_amount),params['amount'])
+            else:
+                #充值失败，余额变化为0
+                self.assertEqual(float(end_amount-start_amount),0)
         except AssertionError as e :
             my_log.error("用例---【{}】---执行失败".format(item['title']))
             my_log.exception(e)
