@@ -4,7 +4,6 @@
 '''
 import unittest
 import os
-
 import requests
 from jsonpath import jsonpath
 from unittestreport import ddt, list_data
@@ -19,7 +18,7 @@ from jieKouDemo.mysqlDemo.handle_mysql import HandleDB
 class TestWithdraw(unittest.TestCase):
     execl = HandleExcel(os.path.join(DATA_DIR, "apicases.xlsx"), 'withdraw')
     cases = execl.read_data()
-    db = HandleDB
+    db = HandleDB()
 
     @classmethod
     def setUpClass(cls):
@@ -44,16 +43,17 @@ class TestWithdraw(unittest.TestCase):
     @list_data(cases)
     def test_withdraw(self, item):
         url = conf.get("env", "base_url") + item['url']
-        # 动态处理需要替换的参数
-        item['data'] = item["data"].replace("#member_id#", str(self.member_id()))
 
+        # 动态处理需要替换的参数
+        if '#member_id' in item['data']:
+            item['data'] = item["data"].replace("#member_id#", str(self.member_id()))
         params = eval(item['data'])
         expected = eval(item['expected'])
         method = item['method'].lower()
 
-        sql = 'select * from futureloan.member where mobile_phone = "{}" '.format(conf.get("test_data","mobile_phone"))
+        sql = 'select * from futureloan.member where mobile_phone = "{}" '.format(conf.get("test_data", "mobile_phone"))
         # 执行sql前查询余额
-        start_amount = self.db.find_one(sql)[0]  #[0]元组数据类型获取
+        start_amount = self.db.find_one(sql)[0]  # [0]元组数据类型获取
 
         response = requests.request(method=method, url=url, json=params, headers=self.headers)
         res = response.json()
@@ -61,17 +61,16 @@ class TestWithdraw(unittest.TestCase):
         # 执行sql后查询余额
         end_amount = self.db.find_one(sql)[0]
 
-
         try:
-            self.assertEqual(expected['code'],res['code'])
-            self.assertEqual(expected['msg'],res['msg'])
+            self.assertEqual(expected['code'], res['code'])
+            self.assertEqual(expected['msg'], res['msg'])
             #    校验余额变化
             if res['code'] == 'OK':
-                self.assertEqual(float(end_amount-start_amount),params['amount'])
+                self.assertEqual(float(end_amount - start_amount), params['amount'])
             else:
-                #充值失败，余额变化为0
-                self.assertEqual(float(end_amount-start_amount),0)
-        except AssertionError as e :
+                # 充值失败，余额变化为0
+                self.assertEqual(float(end_amount - start_amount), 0)
+        except AssertionError as e:
             my_log.error("用例---【{}】---执行失败".format(item['title']))
             my_log.exception(e)
             raise e

@@ -11,6 +11,7 @@ from ..common.handle_excel import HandleExcel
 from ..common.handle_path import DATA_DIR
 from ..common.handle_conf import conf
 from ..common.handler_log import my_log
+from jieKouDemo.mysqlDemo.handle_mysql import HandleDB
 
 
 @ddt
@@ -20,6 +21,7 @@ class TestRegister(unittest.TestCase):
     cases = excel.read_data()
     base_url = conf.get("env", "base_url")
     headers = eval(conf.get("env", "headers"))
+    db = HandleDB()
 
     @list_data(cases)
     def test_register(self, item):
@@ -42,10 +44,15 @@ class TestRegister(unittest.TestCase):
         response = requests.request(method=method,url=url,json=params,headers=self.headers)
         res = response.json()
 
+        sql = 'select * from futureloan.member where mobile_phone = "{}" '.format(params.get("mobile_phone"))
+        count = self.db.find_count(sql)
+
         # 第三步：断言
         try:
             self.assertEqual(expected['code'],res['code'])
             self.assertEqual(expected['msg'],res['msg'])
+            if item['check_sql']:
+                self.assertEqual(count,1)
         except AssertionError as e :
             #记录日志
             my_log.error("用例---【{}】---执行失败".format(item['title']))

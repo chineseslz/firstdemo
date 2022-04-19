@@ -40,7 +40,7 @@ class HandleDB:
 
 
 if __name__ == '__main__':
-    sql = 'select * from futureloan.member LIMIT 5 '
+    sql = 'select * from futureloan.member where mobile_phone =13921840178 '
     db = HandleDB()
-    res = db.find_all(sql)
+    res = db.find_count(sql)
     print(res)
