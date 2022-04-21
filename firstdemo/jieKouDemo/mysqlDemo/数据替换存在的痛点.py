@@ -2,21 +2,31 @@
 # author：slz time:2022/4/20
 '''
 '''
+import re
 
 
-class Test01:
-
+class TestData:
     id = 10
     name = 'slz'
-    data = "0011"
-    title = "OK"
+    data = '0011'
+    title = 'OK'
 
 
-    params = '{"id": "#id#", "name": "#name#", "data": "#data#", "title": "#title#", "aaa": 111, "bbb": 222}'
+params = "{'id': '#id#', 'name': '#name#', 'data': '#data#', 'title': '#title#'}"
 
-    params = params.replace("#id#", str(id))
-    params = params.replace("#name#", str(name))
-    params = params.replace("#data#", str(data))
-    params = params.replace("#title#", str(title))
+
+
+while re.search('#(.+?)#', params):
+    res = re.search('#(.+?)#', params)
+    item = res.group()
+    attr = res.group(1)
+    value = getattr(TestData, attr)
+    params = params.replace(item, str(value))
 
     print(params)
+
+
+# params = params.replace('#id#', str(id))
+# params = params.replace('#name#', str(name))
+# params = params.replace('#data#', str(data))
+# params = params.replace('#title#', str(title))

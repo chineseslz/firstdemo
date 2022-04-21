@@ -29,8 +29,44 @@ print(res1)
 {m,n}   匹配前一个字符出现m到n次
 '''
 params = '{"id": "#id#", "name": "#name#", "data": "#data#", "title": "#title#", "aaa": 111, "bbb": 222}'
-
-str2 = "##，#abs#.jpg#,abbs.#jpg#"
 res2 = re.findall("#.{1,}?#",params)
-res2 = re.findall("#.*?#",str2)
 print(res2)
+
+
+'''边界
+^   表示字符串的开头
+$   表示字符串的结尾
+r\b  表示单词边界 (有空格或者标点符号)
+\B  表示非单词边界
+'''
+s = '0123python465java'
+res3 = re.findall('\B123',s)
+print(res3)
+
+'''分组
+()  分组提取括号中的内容
+|   表示多个匹配规则
+'''
+params1 = '{"id": "#id#", "name": "#name#", "data": "#data#", "title": "#title#", "aaa": 111, "bbb": 222}'
+res4 = re.findall("#(.+?)#",params1)
+print(res4)
+
+s2 = '123456python345java0000'
+res5 = re.findall('python|java',s)
+print(res5)
+
+
+'''
+findall:匹配字符串中所有符合规则的数据并以列表的形式返回
+search：匹配并返回第一个符合规则的匹配对象       .group()     .group(1)         没有匹配到返回none
+'''
+res6 = re.search("#(.+?)#",params1)
+print(res6.group(1))
+
+
+
+
+
+
+
+
