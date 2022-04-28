@@ -45,7 +45,7 @@ class TestWithdraw(unittest.TestCase):
         url = conf.get("env", "base_url") + item['url']
 
         # 动态处理需要替换的参数
-        if '#member_id' in item['data']:
+        if '#member_id#' in item['data']:
             item['data'] = item["data"].replace("#member_id#", str(self.member_id()))
         params = eval(item['data'])
         expected = eval(item['expected'])
@@ -66,7 +66,8 @@ class TestWithdraw(unittest.TestCase):
             self.assertEqual(expected['msg'], res['msg'])
             #    校验余额变化
             if res['code'] == 'OK':
-                self.assertEqual(float(end_amount - start_amount), params['amount'])
+                self.assertEqual(float(end_amount - start_amount),
+                                 params['amount'])
             else:
                 # 充值失败，余额变化为0
                 self.assertEqual(float(end_amount - start_amount), 0)
