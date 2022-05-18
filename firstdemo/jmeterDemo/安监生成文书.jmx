@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="测试计划" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="线程组" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器（json）" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+            </elementProp>
+            <elementProp name="token" elementType="Header">
+              <stringProp name="Header.name">token</stringProp>
+              <stringProp name="Header.value">${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="false">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">token</stringProp>
+              <stringProp name="Header.value">bb904245ad8ce06cafae6155038c61c5</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">bb904245ad8ce06cafae6155038c61c5</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name"></stringProp>
+              <stringProp name="Header.value"></stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="登录" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;username&quot;: &quot;admin&quot;,&#xd;
+	&quot;password&quot;: &quot;Sinorock@2022&quot;,&#xd;
+	&quot;code&quot;:&quot;&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">192.168.1.178</stringProp>
+          <stringProp name="HTTPSampler.port">8086</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+          <stringProp name="HTTPSampler.path">/aj/main/web/login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="login_token" enabled="false">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">token</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.*)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON提取器提取token" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.data.token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">error</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="false">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+            </elementProp>
+            <elementProp name="token" elementType="Header">
+              <stringProp name="Header.name">token</stringProp>
+              <stringProp name="Header.value">${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="新增检查方案" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;baseList&quot;:[{&quot;companyId&quot;:&quot;EP3202001639666744662133072&quot;,&quot;businessAddressFull&quot;:&quot;西安南路188号&quot;,&quot;contactPerson&quot;:&quot;12312312&quot;,&quot;examineTime&quot;:&quot;2022-04-15 00:00:00&quot;,&quot;examineEndTime&quot;:&quot;2022-04-15 23:59:59&quot;,&quot;examSocCode&quot;:&quot;se50001&quot;,&quot;examineType&quot;:&quot;te10001&quot;,&quot;executorId&quot;:&quot;1030293251357044737,USER320200460451729075343360&quot;,&quot;executorDeptId&quot;:&quot;988141569170239490&quot;,&quot;remark&quot;:&quot;备注&quot;}],&quot;probList&quot;:[{&quot;discId&quot;:&quot;DIR273731647327308100&quot;,&quot;checkContent&quot;:&quot;吊运熔融金属的起重机是否符合冶金铸造起重机技术条件,或驱动装置中是否设置两套制动器。吊运浇注包的龙门钩横梁、耳轴销和吊钩等零件，是否进行定期探伤检查&quot;,&quot;discretionTypeCode&quot;:&quot;yjdgm_metal&quot;,&quot;negativeDesc&quot;:&quot;吊运熔融金属的起重机不符合冶金铸造起重机技术条件,或驱动装置中未设置两套制动器。吊运浇注包的龙门钩横梁、耳轴销和吊钩等零件，未进行定期探伤检查&quot;,&quot;confirmRules&quot;:&quot;吊运熔融金属的起重机符合冶金铸造起重机技术条件,或驱动装置中设置两套制动器。吊运浇注包的龙门钩横梁、耳轴销和吊钩等零件，进行定期探伤检查&quot;,&quot;isManual&quot;:&quot;1&quot;,&quot;isAdd&quot;:&quot;1&quot;,&quot;children&quot;:[]},{&quot;discId&quot;:&quot;DIR273731647327308101&quot;,&quot;checkContent&quot;:&quot;盛温熔融金属的罐（包、盆）等容器耳轴是否未按国家标准规定要求定期进行探伤检测&quot;,&quot;discretionTypeCode&quot;:&quot;yjdgm_metal&quot;,&quot;negativeDesc&quot;:&quot;盛装高温熔融金属的罐（包、盆）等容器耳轴未按国家标准规定要求定期进行探伤检测&quot;,&quot;confirmRules&quot;:&quot;盛装高温熔融金属的罐（包、盆）等容器耳轴已经按国家标准规定要求定期进行探伤检测&quot;,&quot;isManual&quot;:&quot;1&quot;,&quot;isAdd&quot;:&quot;1&quot;,&quot;children&quot;:[]},{&quot;discId&quot;:&quot;DIR273731647327308102&quot;,&quot;checkContent&quot;:&quot;高温熔融金属冶炼、精炼、铸造生产区域的安全坑内及熔体泄漏、喷溅影响范围内是否存在非生产性积水；熔体容易喷溅到的区域，是否放置有易燃易爆物品&quot;,&quot;discretionTypeCode&quot;:&quot;yjdgm_metal&quot;,&quot;negativeDesc&quot;:&quot;高温熔融金属冶炼、精炼、铸造生产区域的安全坑内及熔体泄漏、喷溅影响范围内存在非生产性积水；熔体容易喷溅到的区域，放置有易燃易爆物品&quot;,&quot;confirmRules&quot;:&quot;高温熔融金属冶炼、精炼、铸造生产区域的安全坑内及熔体泄漏、喷溅影响范围内不存在非生产性积水；熔体容易喷溅到的区域，未放置易燃易爆物品&quot;,&quot;isManual&quot;:&quot;1&quot;,&quot;isAdd&quot;:&quot;1&quot;,&quot;children&quot;:[]},{&quot;discId&quot;:&quot;DIR320200474966119870894080&quot;,&quot;checkContent&quot;:&quot;生产经营单位分管安全生产的负责人是否履行法定的安全生产职责&quot;,&quot;discretionTypeCode&quot;:&quot;fl012&quot;,&quot;negativeDesc&quot;:&quot;生产经营单位分管安全生产的负责人未履行法定的安全生产职责&quot;,&quot;confirmRules&quot;:&quot;生产经营单位分管安全生产的负责人履行法定的安全生产职责&quot;,&quot;isManual&quot;:&quot;1&quot;,&quot;isAdd&quot;:&quot;1&quot;,&quot;children&quot;:[{&quot;discRulesId&quot;:&quot;DISR320200474966119988334592&quot;,&quot;checkContent&quot;:&quot;是否对安全生产工作实施日常监督管理，落实安全生产责任制、规章制度和技术标准、操作规程&quot;,&quot;negativeDesc&quot;:&quot;未对安全生产工作实施日常监督管理，落实安全生产责任制、规章制度和技术标准、操作规程&quot;,&quot;checkItem&quot;:&quot;是否对安全生产工作实施日常监督管理，落实安全生产责任制、规章制度和技术标准、操作规程&quot;,&quot;confirmRules&quot;:&quot;对安全生产工作实施日常监督管理，落实安全生产责任制、规章制度和技术标准、操作规程&quot;,&quot;isAdd&quot;:&quot;1&quot;},{&quot;discRulesId&quot;:&quot;DISR320200474966119988334593&quot;,&quot;checkContent&quot;:&quot;检查安全管理机构是否履行职责&quot;,&quot;negativeDesc&quot;:&quot;检查安全管理机构未履行职责&quot;,&quot;checkItem&quot;:&quot;检查安全管理机构是否履行职责&quot;,&quot;confirmRules&quot;:&quot;检查安全管理机构履行职责&quot;,&quot;isAdd&quot;:&quot;1&quot;},{&quot;discRulesId&quot;:&quot;DISR320200474966119988334594&quot;,&quot;checkContent&quot;:&quot;是否落实安全生产教育和培训计划&quot;,&quot;negativeDesc&quot;:&quot;未落实安全生产教育和培训计划&quot;,&quot;checkItem&quot;:&quot;是否落实安全生产教育和培训计划&quot;,&quot;confirmRules&quot;:&quot;落实安全生产教育和培训计划&quot;,&quot;isAdd&quot;:&quot;1&quot;},{&quot;discRulesId&quot;:&quot;DISR320200474966119988334595&quot;,&quot;checkContent&quot;:&quot;是否组织实施安全生产风险评估、事故隐患排查及整改&quot;,&quot;negativeDesc&quot;:&quot;未组织实施安全生产风险评估、事故隐患排查及整改&quot;,&quot;checkItem&quot;:&quot;是否组织实施安全生产风险评估、事故隐患排查及整改&quot;,&quot;confirmRules&quot;:&quot;组织实施安全生产风险评估、事故隐患排查及整改&quot;,&quot;isAdd&quot;:&quot;1&quot;},{&quot;discRulesId&quot;:&quot;DISR320200474966119988334596&quot;,&quot;checkContent&quot;:&quot;是否协调解决安全生产工作的问题，并向主要负责人报告&quot;,&quot;negativeDesc&quot;:&quot;未协调解决安全生产工作的问题，并向主要负责人报告&quot;,&quot;checkItem&quot;:&quot;是否协调解决安全生产工作的问题，并向主要负责人报告&quot;,&quot;confirmRules&quot;:&quot;协调解决安全生产工作的问题，并向主要负责人报告&quot;,&quot;isAdd&quot;:&quot;1&quot;},{&quot;discRulesId&quot;:&quot;DISR320200474966119988334597&quot;,&quot;checkContent&quot;:&quot;是否履行法律、法规规定的其他安全生产职责&quot;,&quot;negativeDesc&quot;:&quot;未履行法律、法规规定的其他安全生产职责&quot;,&quot;checkItem&quot;:&quot;是否履行法律、法规规定的其他安全生产职责&quot;,&quot;confirmRules&quot;:&quot;履行法律、法规规定的其他安全生产职责&quot;,&quot;isAdd&quot;:&quot;1&quot;}]}]}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">192.168.1.178</stringProp>
+          <stringProp name="HTTPSampler.port">8086</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/aj/planexamine/saveBatch</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON提取器" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">sourceId</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.data</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器（json）" enabled="false">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+            </elementProp>
+            <elementProp name="token" elementType="Header">
+              <stringProp name="Header.name">token</stringProp>
+              <stringProp name="Header.value">${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="生成文书" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;contractorIds&quot;:&quot;1030293251357044737,USER320200460451729075343360&quot;,&quot;sourceId&quot;:&quot;${sourceId}&quot;,&quot;userId&quot;:&quot;test&quot;,&quot;writType&quot;:&quot;XCJCFA&quot;,&quot;datum&quot;:[{&quot;tagContent&quot;:&quot;SK海力士系统集成电路（无锡）有限公司&quot;,&quot;tagName&quot;:&quot;tag2&quot;},{&quot;tagContent&quot;:&quot;西安南路188号&quot;,&quot;tagName&quot;:&quot;tag3&quot;},{&quot;tagContent&quot;:&quot;12312312&quot;,&quot;tagName&quot;:&quot;tag4&quot;},{&quot;tagContent&quot;:&quot;冶金等工贸&quot;,&quot;tagName&quot;:&quot;tag5&quot;},{&quot;tagContent&quot;:&quot;2022年04月15日&quot;,&quot;tagName&quot;:&quot;tag6&quot;},{&quot;tagContent&quot;:&quot;2022年04月15日&quot;,&quot;tagName&quot;:&quot;tag62&quot;},{&quot;tagContent&quot;:&quot;韩硕、平安&quot;,&quot;tagName&quot;:&quot;tag7&quot;},{&quot;tagContent&quot;:&quot;现场检查&quot;,&quot;tagName&quot;:&quot;tag9&quot;},{&quot;tagContent&quot;:&quot;${__RandomString(1,法动手和国际友人让他,)}&quot;,&quot;tagName&quot;:&quot;tag10&quot;},{&quot;tagContent&quot;:&quot;计划检查&quot;,&quot;tagName&quot;:&quot;tag20&quot;},{&quot;tagContent&quot;:&quot;吊运熔融金属的起重机是否符合冶金铸造起重机技术条件,或驱动装置中是否设置两套制动器。吊运浇注包的龙门钩横梁、耳轴销和吊钩等零件，是否进行定期探伤检查&quot;,&quot;tagName&quot;:&quot;tag8Item&quot;},{&quot;tagContent&quot;:&quot;盛温熔融金属的罐（包、盆）等容器耳轴是否未按国家标准规定要求定期进行探伤检测&quot;,&quot;tagName&quot;:&quot;tag8Item&quot;},{&quot;tagContent&quot;:&quot;高温熔融金属冶炼、精炼、铸造生产区域的安全坑内及熔体泄漏、喷溅影响范围内是否存在非生产性积水；熔体容易喷溅到的区域，是否放置有易燃易爆物品&quot;,&quot;tagName&quot;:&quot;tag8Item&quot;},{&quot;tagContent&quot;:&quot;生产经营单位分管安全生产的负责人是否履行法定的安全生产职责&quot;,&quot;tagName&quot;:&quot;tag8Item&quot;,&quot;children&quot;:[{&quot;tagContent&quot;:&quot;是否对安全生产工作实施日常监督管理，落实安全生产责任制、规章制度和技术标准、操作规程&quot;},{&quot;tagContent&quot;:&quot;检查安全管理机构是否履行职责&quot;},{&quot;tagContent&quot;:&quot;是否落实安全生产教育和培训计划&quot;},{&quot;tagContent&quot;:&quot;是否组织实施安全生产风险评估、事故隐患排查及整改&quot;},{&quot;tagContent&quot;:&quot;是否协调解决安全生产工作的问题，并向主要负责人报告&quot;},{&quot;tagContent&quot;:&quot;是否履行法律、法规规定的其他安全生产职责&quot;}]}]}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">192.168.1.178</stringProp>
+          <stringProp name="HTTPSampler.port">8086</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/aj/writ/writ</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="汇总报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="汇总图" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
